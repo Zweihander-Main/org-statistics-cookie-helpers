@@ -16,7 +16,7 @@ hi [a+] zweisolutions {●} com
 
 [AGPLv3](./LICENSE)
 
-    process-org-agenda-inbox
+    org-statistics-cookie-helpers
     Copyright (C) 2021 Zweihänder
 
     This program is free software: you can redistribute it and/or modify
