@@ -3,7 +3,7 @@
 
 (package-file "org-statistics-cookie-helpers.el")
 
-(files "process-org-agenda-inbox-test.el")
+(files "org-statistics-cookie-helpers.el")
 
 (depends-on "org")
 
