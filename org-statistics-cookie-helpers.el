@@ -3,9 +3,10 @@
 ;; Copyright (C) 2021, Zweihänder <zweidev@zweihander.me>
 ;;
 ;; Author: Zweihänder
-;; Keywords: org-mode
+;; Keywords: outlines
 ;; Homepage: https://github.com/Zweihander-Main/org-statistics-cookie-helpers
 ;; Version: 0.0.1
+;; Package-Requires: ((emacs "27.1"))
 
 ;; This file is not part of GNU Emacs.
 
@@ -41,7 +42,7 @@
 (defun org-statistics-cookie-helpers-insert-cookies (&optional type)
   "Insert statistics cookie of optional TYPE % (default) or /."
   (save-excursion
-    (let ((cur-tags-string (org-get-tags-string)))
+    (let ((cur-tags-string (org-make-tag-string (org-get-tags))))
       (if (not (eq cur-tags-string ""))
           (when (org-back-to-heading t)
             (re-search-forward org-tag-line-re)
@@ -69,7 +70,7 @@
 
 (defun org-statistics-cookie-helpers-delete-cookies ()
   "Delete statistics cookies on line."
-  (let ((cookie (zwei/org-find-statistics-cookies)))
+  (let ((cookie (org-statistics-cookie-helpers-find-cookies)))
     (when cookie
       (delete-region (plist-get cookie :begin) (plist-get cookie :end))
       (save-excursion
@@ -81,15 +82,16 @@
 (defun org-statistics-cookie-helpers-toggle-cookies ()
   "Toggle between [/] and [%] type statistics cookies on line."
   (interactive)
-  (let ((type (plist-get (zwei/org-find-statistics-cookies) :type)))
-    (zwei/org-delete-statistics-cookies)
-    (cond ((eq type '%) (zwei/org-insert-statistics-cookies '/))
-          ((eq type '/) (zwei/org-insert-statistics-cookies '%)))))
+  (let ((type (plist-get (org-statistics-cookie-helpers-find-cookies) :type)))
+    (org-statistics-cookie-helpers-delete-cookies)
+    (cond ((eq type '%) (org-statistics-cookie-helpers-insert-cookies '/))
+          ((eq type '/) (org-statistics-cookie-helpers-insert-cookies '%)))))
 
 (provide 'org-statistics-cookie-helpers)
 
 ;; Local Variables:
 ;; coding: utf-8
+;; flycheck-disabled-checkers: 'emacs-lisp-elsa
 ;; End:
 
 ;;; org-statistics-cookie-helpers.el ends here
