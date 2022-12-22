@@ -5,8 +5,6 @@
 
 (files "org-statistics-cookie-helpers.el")
 
-(depends-on "org")
-
 (development
  (depends-on "f")
  (depends-on "elsa")

@@ -39,7 +39,6 @@
 
 ;; Local Variables:
 ;; coding: utf-8
-;; flycheck-disabled-checkers: 'emacs-lisp-elsa
 ;; End:
 
 ;;; org-statistics-cookie-helpers-test.el ends here
